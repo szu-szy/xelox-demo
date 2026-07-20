@@ -1,0 +1,174 @@
+/* ============================================================
+   SECTIONS — style biblioteki sekcji.
+   ============================================================ */
+
+/* ── Hero (full-bleed, „pływający" zaokrąglony — wzorzec magic/stalver) ── */
+.xelox-hero {
+	position: relative; isolation: isolate; overflow: hidden;
+	min-height: clamp(540px, 78vh, 820px);
+	display: flex; align-items: center;
+	border-radius: var(--radius-xl);
+	margin: var(--sp-4) var(--sp-4) 0;        /* „pływa" — odsunięty od krawędzi */
+	box-shadow: var(--shadow-lift);
+}
+.xelox-hero__media { position: absolute; inset: 0; z-index: -2; background-color: var(--c-bg-alt); background-size: cover; background-position: center; }
+.xelox-hero__overlay { position: absolute; inset: 0; z-index: -1; }
+/* Wariant ze zdjęciem/wideo w tle: ciemny overlay + jasny tekst */
+.xelox-hero--media .xelox-hero__overlay { background: linear-gradient(180deg, rgba(15,18,28,.25) 0%, rgba(15,18,28,.65) 100%); }
+/* Wariant wideo — <video> jako pełnoekranowe tło */
+.xelox-hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.xelox-hero--media .xelox-hero__title, .xelox-hero--media .xelox-hero__lead, .xelox-hero--media .xelox-hero__proof { color: #fff; }
+.xelox-hero--media .xelox-eyebrow { color: #fff; }
+
+.xelox-hero__inner { width: 100%; padding-block: var(--sp-8); }
+.xelox-hero__copy { max-width: 720px; }
+.xelox-hero__title { font-size: var(--text-2xl); margin: var(--sp-2) 0 var(--sp-4); }
+.xelox-hero__lead { font-size: var(--text-lg); color: var(--c-ink-soft); max-width: 56ch; }
+.xelox-hero .xelox-flow-cta { margin-top: var(--sp-6); }
+
+.xelox-hero__proof { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-4); margin-top: var(--sp-6); padding-top: var(--sp-5); border-top: 1px solid var(--c-line); }
+.xelox-hero__rating { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--text-sm); }
+.xelox-hero__stars { display: inline-flex; color: #f5a623; }
+.xelox-hero__rating strong { font-size: var(--text-base); }
+.xelox-hero__rating-sub, .xelox-hero__proof-note { color: var(--c-muted); font-size: var(--text-sm); display: inline-flex; align-items: center; gap: var(--sp-2); }
+.xelox-hero__proof-note .xelox-ico { color: var(--c-success); }
+.xelox-hero__proof-sep { width: 1px; height: 28px; background: var(--c-line); }
+
+@media (max-width: 720px) {
+	.xelox-hero { margin: 0; border-radius: 0; min-height: auto; }
+	.xelox-hero__inner { padding-block: var(--sp-8) var(--sp-7); }
+	.xelox-hero__proof { gap: var(--sp-3); }
+}
+
+/* ── Karty generyczne (blog/realizacje/cennik) ── */
+.xelox-card h3 { margin-bottom: var(--sp-2); }
+.xelox-card p { color: var(--c-ink-soft); font-size: var(--text-sm); }
+.xelox-card__price { display: inline-block; margin-top: var(--sp-3); font-weight: var(--fw-semibold); color: var(--c-brand-ink); }
+
+/* ── Oferta: media-cards (TŁO na kafelku, overlay, ZERO ikon) ── */
+.xelox-media-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); grid-auto-rows: 300px; }
+.xelox-media-card { position: relative; isolation: isolate; display: flex; align-items: flex-end; border-radius: var(--radius-lg); overflow: hidden; background-size: cover; background-position: center; box-shadow: var(--shadow-card); color: #fff; transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease); }
+.xelox-media-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+.xelox-media-card--lg { grid-row: span 2; }
+.xelox-media-card__bg { position: absolute; inset: 0; z-index: -2; }
+/* Kafelek bez zdjęcia: spójny z marką gradient zieleń→czarny (ZERO tęczy/losowych hue).
+   Tekst (białe nagłówki) czyta się dzięki ciemnemu dołowi gradientu + nakładce ::after. */
+.xelox-media-card__bg[data-gradient] { background: linear-gradient(150deg, var(--c-brand-hover) 0%, var(--c-ink) 100%); }
+.xelox-media-card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 25%, rgba(10,12,20,.82) 100%); }
+.xelox-media-card__body { padding: var(--sp-5); }
+.xelox-media-card__title { color: #fff; }
+.xelox-media-card__desc { color: rgba(255,255,255,.85); font-size: var(--text-sm); margin-top: var(--sp-2); }
+.xelox-media-card__arrow { display: inline-flex; align-items: center; gap: 6px; margin-top: var(--sp-3); font-weight: var(--fw-semibold); font-size: var(--text-sm); }
+.xelox-media-card__arrow .xelox-ico { transition: transform var(--dur-base) var(--ease); }
+.xelox-media-card:hover .xelox-media-card__arrow .xelox-ico { transform: translateX(4px); }
+@media (max-width: 1024px) { .xelox-media-grid { grid-template-columns: repeat(2, 1fr); } .xelox-media-card--lg { grid-row: auto; } }
+@media (max-width: 640px) { .xelox-media-grid { grid-template-columns: 1fr; grid-auto-rows: 240px; } }
+
+/* ── Dlaczego my (split: intro + lista) ── */
+.xelox-why { display: grid; grid-template-columns: 1fr 1.15fr; gap: var(--sp-8); align-items: center; }
+.xelox-why__intro p { color: var(--c-ink-soft); margin: var(--sp-3) 0 var(--sp-5); }
+.xelox-why__list { list-style: none; display: grid; gap: var(--sp-4); }
+.xelox-why__item { display: flex; gap: var(--sp-4); align-items: flex-start; background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius-lg); padding: var(--sp-4) var(--sp-5); transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease); }
+.xelox-why__item:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.xelox-why__check { flex: 0 0 auto; display: inline-flex; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--radius-pill); background: var(--c-brand-soft); color: var(--c-brand-ink); }
+.xelox-why__item strong { display: block; }
+.xelox-why__item p { color: var(--c-ink-soft); font-size: var(--text-sm); margin-top: 2px; }
+@media (max-width: 1024px) { .xelox-why { grid-template-columns: 1fr; gap: var(--sp-6); } }
+
+/* ── Proces (stepper z linią łączącą) ── */
+.xelox-process { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-5); position: relative; }
+.xelox-process::before { content: ""; position: absolute; top: 24px; left: 12%; right: 12%; height: 2px; background: linear-gradient(90deg, var(--c-brand-soft), var(--c-brand), var(--c-brand-soft)); z-index: 0; }
+.xelox-process__step { text-align: center; position: relative; z-index: 1; }
+.xelox-process__num { display: inline-flex; width: 48px; height: 48px; align-items: center; justify-content: center; border-radius: var(--radius-pill); background: var(--c-brand); color: var(--c-on-brand); font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--text-lg); box-shadow: 0 0 0 6px var(--c-bg); transition: transform var(--dur-base) var(--ease); }
+.xelox-process__step:hover .xelox-process__num { transform: scale(1.08); }
+.xelox-process__step h3 { margin: var(--sp-3) 0 var(--sp-1); font-size: var(--text-base); }
+.xelox-process__step p { color: var(--c-ink-soft); font-size: var(--text-sm); max-width: 26ch; margin-inline: auto; }
+@media (max-width: 860px) {
+	.xelox-process { grid-template-columns: 1fr; gap: var(--sp-5); padding-left: var(--sp-6); }
+	.xelox-process::before { top: 0; bottom: 0; left: 24px; right: auto; width: 2px; height: auto; background: linear-gradient(180deg, var(--c-brand-soft), var(--c-brand), var(--c-brand-soft)); }
+	.xelox-process__step { text-align: left; display: grid; grid-template-columns: auto 1fr; gap: var(--sp-4); align-items: start; }
+	.xelox-process__num { box-shadow: 0 0 0 6px var(--c-bg-alt); }
+	.xelox-process__step h3 { margin-top: 8px; }
+	.xelox-process__step p { margin-inline: 0; max-width: none; }
+}
+
+/* ── Liczniki: ciemny pas marki ── */
+.xelox-counters-band { background: linear-gradient(135deg, var(--c-ink) 0%, #1d2740 100%); border-radius: var(--radius-xl); margin-inline: var(--sp-4); }
+.xelox-counters-band .xelox-counter__num { color: #fff; }
+.xelox-counters-band .xelox-counter__label { color: rgba(255,255,255,.6); }
+.xelox-counter { text-align: center; }
+.xelox-counter__num { display: block; font-family: var(--font-display); font-size: var(--text-xl); font-weight: var(--fw-bold); color: var(--c-brand-ink); letter-spacing: var(--ls-tight); }
+.xelox-counter__label { color: var(--c-muted); font-size: var(--text-sm); }
+@media (max-width: 720px) { .xelox-counters-band { margin-inline: 0; } }
+
+/* ── Opinie (cytaty z avatarem) ── */
+.xelox-review { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius-lg); padding: var(--sp-5); box-shadow: var(--shadow-card); }
+.xelox-review__stars { display: flex; gap: 2px; color: #f5a623; margin-bottom: var(--sp-3); }
+.xelox-review blockquote { font-size: var(--text-base); color: var(--c-ink); }
+.xelox-review__author { display: flex; align-items: center; gap: var(--sp-3); margin-top: var(--sp-4); font-weight: var(--fw-semibold); font-size: var(--text-sm); }
+.xelox-review__avatar { display: inline-flex; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--radius-pill); background: var(--c-brand-soft); color: var(--c-brand-ink); font-family: var(--font-display); }
+
+/* ── Zaufanie (uczciwy fallback bez fabrykowanych opinii) ── */
+.xelox-trust { max-width: 720px; margin: 0 auto; text-align: center; background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius-lg); padding: var(--sp-6); box-shadow: var(--shadow-card); }
+.xelox-trust__lead { font-size: var(--text-base); color: var(--c-ink-soft, var(--c-muted)); margin: 0 auto var(--sp-5); max-width: 56ch; }
+.xelox-trust__signals { list-style: none; display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-5); justify-content: center; margin: 0 0 var(--sp-5); padding: 0; }
+.xelox-trust__signals li { display: inline-flex; align-items: center; gap: var(--sp-2); font-weight: var(--fw-medium); font-size: var(--text-sm); color: var(--c-ink); }
+.xelox-trust__signals li .xelox-ico, .xelox-trust__signals li svg { color: var(--c-brand-ink); flex: 0 0 auto; }
+
+/* ── FAQ / accordion ── */
+.xelox-accordion__item { border: 1px solid var(--c-line); border-radius: var(--radius-md); margin-bottom: var(--sp-3); overflow: hidden; background: var(--c-card); }
+.xelox-accordion__head { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); padding: var(--sp-4) var(--sp-5); background: none; border: 0; cursor: pointer; text-align: left; font-family: var(--font-display); font-weight: var(--fw-semibold); font-size: var(--text-base); color: var(--c-ink); }
+.xelox-accordion__head .xelox-ico { transition: transform var(--dur-base) var(--ease); flex: 0 0 auto; }
+.xelox-accordion__head[aria-expanded="true"] .xelox-ico { transform: rotate(90deg); }
+.xelox-accordion__panel { padding: 0 var(--sp-5) var(--sp-5); color: var(--c-ink-soft); }
+
+/* ── CTA band ── */
+.xelox-cta-band { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-5); background: linear-gradient(135deg, var(--c-brand) 0%, var(--c-brand-hover) 100%); color: var(--c-on-brand); border-radius: var(--radius-xl); padding: var(--sp-7); box-shadow: var(--shadow-lift); }
+.xelox-cta-band h2 { color: var(--c-on-brand); }
+.xelox-cta-band p { color: var(--c-on-brand); opacity: .82; margin-top: var(--sp-2); }
+.xelox-cta-band .xelox-btn--secondary { color: var(--c-on-brand); border-color: var(--c-on-brand); }
+.xelox-cta-band .xelox-btn--secondary:hover { background: rgba(0,0,0,.10); border-color: var(--c-on-brand); color: var(--c-on-brand); }
+
+/* ── Zespół — grid ── */
+.xelox-member { text-align: center; }
+.xelox-member__photo { aspect-ratio: 1; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--c-brand-soft), var(--c-bg-alt)); margin-bottom: var(--sp-3); }
+.xelox-member h3 { margin-bottom: 2px; }
+.xelox-member p { color: var(--c-muted); font-size: var(--text-sm); }
+/* ── Solo ekspert ── */
+.xelox-expert { display: flex; gap: var(--sp-8); align-items: center; }
+.xelox-expert__photo { flex: 0 0 200px; aspect-ratio: 1; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--c-brand-soft), var(--c-bg-alt)); }
+.xelox-expert__body h2 { margin: var(--sp-2) 0 var(--sp-3); }
+.xelox-expert__bio { color: var(--c-text); font-size: var(--text-base); max-width: 56ch; }
+@media (max-width: 640px) {
+  .xelox-expert { flex-direction: column; }
+  .xelox-expert__photo { flex: 0 0 auto; width: 140px; align-self: center; }
+}
+
+/* ── Kontakt ── */
+.xelox-contact.xelox-split { grid-template-columns: 1fr 1fr; }
+.xelox-contact__list { list-style: none; display: flex; flex-direction: column; gap: var(--sp-3); }
+.xelox-contact__list li { display: flex; align-items: center; gap: var(--sp-3); }
+.xelox-contact__list .xelox-ico { color: var(--c-brand-ink); flex: 0 0 auto; }
+.xelox-contact__map { margin-top: var(--sp-5); border-radius: var(--radius-lg); overflow: hidden; }
+.xelox-contact__map iframe { width: 100%; min-height: 280px; border: 0; display: block; }
+@media (max-width: 1024px) { .xelox-contact.xelox-split { grid-template-columns: 1fr; } }
+
+/* ── Cennik ── */
+.xelox-price-card { text-align: center; position: relative; display: flex; flex-direction: column; }
+.xelox-price-card__amount { font-family: var(--font-display); font-size: var(--text-lg); font-weight: var(--fw-bold); color: var(--c-brand-ink); margin: var(--sp-2) 0 var(--sp-3); }
+.xelox-price-card__desc { color: var(--c-muted); font-size: var(--text-sm); margin-bottom: var(--sp-4); }
+.xelox-price-card__features { list-style: none; text-align: left; display: flex; flex-direction: column; gap: var(--sp-2); margin: 0 0 var(--sp-5); padding: 0; }
+.xelox-price-card__features li { display: flex; align-items: flex-start; gap: var(--sp-2); font-size: var(--text-sm); color: var(--c-ink); }
+.xelox-price-card__features li svg, .xelox-price-card__features li .xelox-ico { color: var(--c-brand-ink); flex: 0 0 auto; margin-top: 3px; }
+.xelox-price-card__features li span { flex: 1; }
+.xelox-price-card .xelox-btn { margin-top: auto; }
+.xelox-price-card__badge { position: absolute; top: calc(-1 * var(--sp-3)); left: 50%; transform: translateX(-50%); background: var(--c-brand); color: var(--c-on-brand); font-family: var(--font-display); font-weight: var(--fw-semibold); font-size: var(--text-xs); padding: 4px 14px; border-radius: var(--radius-pill); white-space: nowrap; }
+.xelox-price-card--featured { border-color: var(--c-brand); box-shadow: var(--shadow-lift); }
+.xelox-pricing-note { text-align: center; font-size: var(--text-sm); margin-top: var(--sp-5); }
+
+/* ── Filtr realizacji ── */
+.xelox-filter { display: flex; flex-wrap: wrap; gap: var(--sp-2); justify-content: center; }
+.xelox-filter__btn { padding: 8px 18px; border-radius: var(--radius-pill); border: 1.5px solid var(--c-line); font-size: var(--text-sm); font-weight: var(--fw-medium); color: var(--c-ink); }
+.xelox-filter__btn:hover, .xelox-filter__btn.is-active { background: var(--c-brand); border-color: var(--c-brand); color: var(--c-on-brand); }
+
+.xelox-muted { color: var(--c-muted); }

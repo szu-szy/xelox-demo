@@ -1,0 +1,76 @@
+/* ============================================================
+   Editor-style — edytor blokowy w barwach motywu XELOX.
+   Ładowany przez add_editor_style() (inc/setup.php). Tylko admin.
+   Cel: SEOwiec pisze wpis i widzi typografię/kolory jak na froncie
+   (single.php → .xelox-art-prose, assets/css/pages/blog.css).
+   ============================================================ */
+
+.editor-styles-wrapper {
+	--c-brand: #2babe3;
+	--c-brand-ink: #12729e;
+	--c-ink: #22376f;
+	--c-ink-soft: #45527d;
+	font-family: "Kumbh Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+	font-size: 1.06rem;
+	line-height: 1.8;
+	color: var(--c-ink-soft);
+}
+
+/* Tytuł wpisu */
+.editor-styles-wrapper .wp-block-post-title {
+	font-family: "Kumbh Sans", system-ui, sans-serif;
+	font-weight: 800;
+	color: var(--c-ink);
+	line-height: 1.15;
+}
+
+/* Nagłówki treści — H2 buduje spis treści na froncie */
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3 {
+	font-family: "Kumbh Sans", system-ui, sans-serif;
+	color: var(--c-ink);
+	font-weight: 700;
+}
+.editor-styles-wrapper h2 { font-size: 1.75rem; margin: 2em 0 0.6em; }
+.editor-styles-wrapper h3 { font-size: 1.35rem; margin: 1.6em 0 0.5em; }
+
+.editor-styles-wrapper p { margin: 0 0 1.3em; }
+.editor-styles-wrapper a { color: var(--c-brand-ink); text-underline-offset: 3px; }
+
+.editor-styles-wrapper blockquote,
+.editor-styles-wrapper .wp-block-quote {
+	border-left: 3px solid var(--c-brand);
+	padding: 4px 0 4px 26px;
+	font-size: 1.3rem;
+	line-height: 1.5;
+	color: var(--c-ink);
+	font-style: italic;
+}
+
+.editor-styles-wrapper ul,
+.editor-styles-wrapper ol { padding-left: 1.4em; }
+.editor-styles-wrapper li + li { margin-top: 0.4em; }
+
+.editor-styles-wrapper img { border-radius: 14px; max-width: 100%; height: auto; }
+.editor-styles-wrapper figcaption {
+	font-size: 0.85rem;
+	color: var(--c-ink-soft);
+	text-align: center;
+	margin-top: 0.5em;
+}
+
+.editor-styles-wrapper .wp-block-table table { border-collapse: collapse; width: 100%; }
+.editor-styles-wrapper .wp-block-table th,
+.editor-styles-wrapper .wp-block-table td {
+	border: 1px solid #dfe4ee;
+	padding: 10px 14px;
+	text-align: left;
+}
+.editor-styles-wrapper .wp-block-table th { background: #f3f5f9; color: var(--c-ink); font-weight: 700; }
+
+.editor-styles-wrapper hr,
+.editor-styles-wrapper .wp-block-separator {
+	border: 0;
+	border-top: 1px solid #dfe4ee;
+	margin: 2.4em auto;
+}

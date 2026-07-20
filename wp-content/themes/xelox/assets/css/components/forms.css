@@ -1,0 +1,43 @@
+/* ── Formularze CF7 (bridge na tokenach, zero !important) ── */
+.wpcf7 .xelox-rodo, .wpcf7 p { margin: 0 0 var(--sp-4); }
+.wpcf7-form-control-wrap { display: block; }
+
+/* Komunikaty CF7 */
+.wpcf7 .wpcf7-not-valid-tip { color: var(--c-danger); font-size: var(--text-xs); margin-top: var(--sp-1); display: block; }
+.wpcf7 .wpcf7-not-valid { border-color: var(--c-danger); }
+.wpcf7-response-output {
+	display: none;                                  /* domyślnie ukryty — koniec pustej ramki w stanie init */
+	border-radius: var(--radius-md); padding: var(--sp-3) var(--sp-4); margin: var(--sp-4) 0 0; font-size: var(--text-sm);
+	border: 1.5px solid var(--c-line);
+}
+/* pokaż tylko gdy jest realny komunikat (nie w init/validating) */
+.wpcf7 form:not(.init):not(.validating) .wpcf7-response-output { display: block; }
+.wpcf7 form.invalid .wpcf7-response-output, .wpcf7 form.spam .wpcf7-response-output, .wpcf7 form.unaccepted .wpcf7-response-output { border-color: var(--c-danger); background: #fdecea; color: var(--c-danger); }
+.wpcf7 form.sent .wpcf7-response-output { border-color: var(--c-success); background: #eafaf0; color: var(--c-success); }
+/* techniczny fieldset z ukrytymi polami — nigdy nie pokazuj domyślnej ramki przeglądarki */
+.wpcf7 fieldset.hidden-fields-container { display: none; margin: 0; padding: 0; border: 0; }
+
+/* Spinner */
+.wpcf7 .wpcf7-spinner { margin-left: var(--sp-3); }
+
+/* ── Premium RODO checkbox ── */
+.xelox-rodo .wpcf7-acceptance { display: block; }
+.xelox-rodo .wpcf7-list-item { margin: 0; }
+.xelox-rodo label { display: flex; gap: var(--sp-3); align-items: flex-start; cursor: pointer; font-size: var(--text-xs); color: var(--c-muted); font-weight: var(--fw-regular); line-height: 1.5; }
+.xelox-rodo input[type=checkbox] {
+	appearance: none; -webkit-appearance: none;
+	flex: 0 0 auto; width: 22px; height: 22px; margin-top: 1px;
+	border: 1.5px solid var(--c-line); border-radius: var(--radius-sm);
+	background: var(--c-bg); cursor: pointer; position: relative;
+	transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.xelox-rodo input[type=checkbox]:checked { background: var(--c-brand); border-color: var(--c-brand); }
+.xelox-rodo input[type=checkbox]:checked::after {
+	content: ""; position: absolute; left: 7px; top: 3px; width: 6px; height: 11px;
+	border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg);
+}
+.xelox-rodo input[type=checkbox]:focus-visible { outline: 3px solid var(--c-brand); outline-offset: 2px; }
+
+/* reCAPTCHA badge — dyskretnie (jeśli aktywne) */
+.grecaptcha-badge { opacity: .25; transition: opacity var(--dur-base) var(--ease); }
+.grecaptcha-badge:hover { opacity: 1; }

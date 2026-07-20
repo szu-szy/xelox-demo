@@ -1,0 +1,103 @@
+/* ============================================================
+   MOTION POLISH — płynne interakcje/animacje w całym serwisie.
+   Tylko transform/opacity/box-shadow. Całość pod prefers-reduced-motion.
+   ============================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+
+	/* ── Reveal: nieco mocniejsze wejście + głębszy stagger ── */
+	.xelox-js .xelox-reveal { transform: translateY(24px); }
+	.xelox-js .xelox-reveal.is-visible { transform: none; }
+	.xelox-reveal[data-delay="4"] { transition-delay: 320ms; }
+	.xelox-reveal[data-delay="5"] { transition-delay: 400ms; }
+
+	/* ── Przyciski: feedback kliknięcia + „shine" na secondary/ghost/indigo ── */
+	.xelox-btn { transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-base) var(--ease), background var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease), color var(--dur-base) var(--ease); }
+	.xelox-btn:active { transform: translateY(0) scale(.98); }
+	.xelox-btn--secondary, .xelox-btn--ghost, .xelox-btn--indigo { position: relative; overflow: hidden; }
+	.xelox-btn--secondary::after, .xelox-btn--ghost::after, .xelox-btn--indigo::after {
+		content: ""; position: absolute; inset: 0; pointer-events: none;
+		background: linear-gradient(120deg, transparent 32%, rgba(255,255,255,.25) 50%, transparent 68%);
+		transform: translateX(-130%); transition: transform var(--dur-slow) var(--ease);
+	}
+	.xelox-btn--secondary:hover::after, .xelox-btn--ghost:hover::after, .xelox-btn--indigo:hover::after { transform: translateX(130%); }
+
+	/* ── Karty: spójny lift na hover ── */
+	.xelox-scard, .xelox-team-card, .xelox-pstep, .xelox-review, .xelox-blogcard, .xelox-lift {
+		transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease);
+	}
+
+	/* ── Linki: animowane podkreślenie (stopka + treść) ── */
+	.xelox-footer a:not(.xelox-btn):not([class*="__soc"]):not(.xelox-footer__logo-link),
+	.xelox-prose a:not(.xelox-btn) {
+		background-image: linear-gradient(currentColor, currentColor);
+		background-size: 0% 1.5px; background-position: 0 100%; background-repeat: no-repeat;
+		transition: background-size var(--dur-base) var(--ease), color var(--dur-fast) var(--ease);
+	}
+	.xelox-footer a:not(.xelox-btn):not([class*="__soc"]):not(.xelox-footer__logo-link):hover,
+	.xelox-prose a:not(.xelox-btn):hover { background-size: 100% 1.5px; }
+
+	/* ── Strzałki „→": nudge w prawo ── */
+	.xelox-scard__link span, .xelox-choose__actions span, .xelox-link-arrow span,
+	.xelox-blogcard__more span, .xelox-hero__btns .xelox-btn span[aria-hidden] {
+		display: inline-block; transition: transform var(--dur-fast) var(--ease);
+	}
+	.xelox-scard:hover .xelox-scard__link span,
+	.xelox-blogcard:hover .xelox-blogcard__more span { transform: translateX(4px); }
+
+	/* ── Ikony w listach usług / usp — delikatny „pop" ── */
+	.xelox-scard__ico, .xelox-quicktrust__ico, .xelox-stat__ico { transition: transform var(--dur-base) var(--ease), filter var(--dur-base) var(--ease); }
+	.xelox-stat:hover .xelox-stat__ico { transform: translateY(-3px) scale(1.06); }
+
+	/* ── Partnerzy: subtelne wejście koloru już jest; dodaj lekki tilt ── */
+	.xelox-partners__logo:hover img { transform: scale(1.04); }
+	.xelox-partners__logo img { transition: filter var(--dur-base) var(--ease), opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease); }
+}
+
+/* ============================================================
+   FORMULARZE — płynne stany pól + komunikaty
+   (poza @media reduced — kontrast/kolory zawsze; ruch minimalny) ============================================================ */
+
+/* Pola: hover + „unoszenie" fokusu (płynne) */
+input[type=text], input[type=email], input[type=tel], input[type=url],
+input[type=number], input[type=search], input[type=date], input[type=month], textarea, select {
+	transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-base) var(--ease), background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+input:hover:not(:focus), textarea:hover:not(:focus), select:hover:not(:focus) { border-color: color-mix(in srgb, var(--c-brand) 45%, var(--c-line)); }
+input:focus, textarea:focus, select:focus { background: #fff; }
+@media (prefers-reduced-motion: no-preference) {
+	input:focus, textarea:focus, select:focus { transform: translateY(-1px); }
+}
+::placeholder { color: var(--c-muted); opacity: .8; transition: opacity var(--dur-fast) var(--ease); }
+input:focus::placeholder, textarea:focus::placeholder { opacity: .5; }
+
+/* Komunikaty CF7 — płynne wjechanie */
+.wpcf7-response-output { animation: xelox-msg-in var(--dur-base) var(--ease-out) both; }
+@keyframes xelox-msg-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .wpcf7-response-output { animation: none; } }
+
+/* Pole błędne — delikatne „shake" */
+@media (prefers-reduced-motion: no-preference) {
+	.wpcf7 .wpcf7-not-valid { animation: xelox-shake .4s var(--ease); }
+	@keyframes xelox-shake { 10%,90%{transform:translateX(-1px)} 30%,70%{transform:translateX(2px)} 50%{transform:translateX(-3px)} }
+}
+
+/* Stan wysyłania — przycisk „ładuje się" (klasa dodawana przez JS) */
+.xelox-form--sending button[type=submit], .xelox-form--sending .wpcf7-submit,
+form.submitting .wpcf7-submit {
+	opacity: .75; cursor: progress; pointer-events: none;
+}
+.xelox-form--sending button[type=submit]::after, form.submitting .wpcf7-submit::after {
+	content: ""; display: inline-block; width: 15px; height: 15px; margin-left: 10px; vertical-align: -2px;
+	border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%;
+	animation: xelox-spin .7s linear infinite;
+}
+@keyframes xelox-spin { to { transform: rotate(360deg); } }
+
+/* ── Mobile: minimalne tap-targety (WCAG 2.5.8) dla drobnych linków ── */
+@media (max-width: 782px) {
+	.xelox-hquote__alt a, .xelox-svc-card__call, .xelox-footer a[href^="tel:"], .xelox-footer a[href^="mailto:"] {
+		min-height: 24px; display: inline-flex; align-items: center; gap: 6px;
+	}
+	.xelox-header__logo-link { min-height: 44px; }
+}

@@ -1,0 +1,239 @@
+/* ============================================================
+   COMPONENTS — karty, badge, animacje/interakcje (kanon).
+   ============================================================ */
+
+/* ── Karta ── */
+.xelox-card {
+	background: var(--c-card);
+	border: 1px solid var(--c-line);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-card);
+	padding: var(--sp-5);
+	transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease);
+}
+.xelox-card--link:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); border-color: transparent; }
+.xelox-card__media { position: relative; border-radius: var(--radius-md); overflow: hidden; margin-bottom: var(--sp-4); aspect-ratio: 16/10; }
+.xelox-card__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-slow) var(--ease); }
+.xelox-card--link:hover .xelox-card__media img { transform: scale(1.05); }
+
+/* ── Badge / pill ── */
+.xelox-badge { display: inline-block; padding: 4px 12px; border-radius: var(--radius-pill); background: var(--c-brand-soft); color: var(--c-brand-hover); font-size: var(--text-xs); font-weight: var(--fw-semibold); }
+
+/* ── Divider ── */
+.xelox-divider { height: 1px; background: var(--c-line); border: 0; margin-block: var(--sp-6); }
+
+/* ============================================================
+   ANIMACJE / INTERAKCJE (kanon — spójny zestaw na całej stronie)
+   ============================================================ */
+
+/* Scroll-reveal: ukrywaj TYLKO gdy JS aktywny (.xelox-js na <html>).
+   Bez JS / przy błędzie modułu treść jest widoczna (progressive enhancement). */
+.xelox-js .xelox-reveal { opacity: 0; transform: translateY(18px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+.xelox-js .xelox-reveal.is-visible { opacity: 1; transform: none; }
+.xelox-reveal[data-delay="1"] { transition-delay: 80ms; }
+.xelox-reveal[data-delay="2"] { transition-delay: 160ms; }
+.xelox-reveal[data-delay="3"] { transition-delay: 240ms; }
+@media (prefers-reduced-motion: reduce) { .xelox-js .xelox-reveal { opacity: 1; transform: none; } }
+
+/* Hover-lift util */
+.xelox-lift { transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease); }
+.xelox-lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+
+/* ── Floating phone FAB (wszystkie ekrany, prawy dolny róg) ── */
+.xelox-fab {
+	position: fixed; right: clamp(16px, 2.4vw, 28px); bottom: clamp(16px, 2.4vw, 28px); z-index: var(--z-toast);
+	width: 60px; height: 60px; border-radius: var(--radius-pill);
+	display: flex; align-items: center; justify-content: center;
+	background: var(--c-brand); color: var(--c-on-brand);
+	box-shadow: 0 14px 30px -8px color-mix(in srgb, var(--c-brand) 55%, transparent), 0 4px 10px rgba(0,0,0,.12);
+	isolation: isolate;
+	animation: xelox-fab-in var(--dur-slow) var(--ease-out) both;
+	transition: transform var(--dur-base) var(--ease), background var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+}
+.xelox-fab svg { position: relative; z-index: 1; transition: transform var(--dur-base) var(--ease); }
+/* Pulsujący pierścień (zwraca uwagę, nie krzyczy) */
+.xelox-fab::before {
+	content: ""; position: absolute; inset: 0; z-index: 0; border-radius: inherit;
+	background: var(--c-brand); animation: xelox-fab-pulse 2.4s var(--ease) infinite;
+}
+.xelox-fab:hover { transform: translateY(-3px) scale(1.05); background: var(--c-brand-hover); color: var(--c-on-brand); }
+.xelox-fab:hover svg { transform: rotate(-8deg); }
+.xelox-fab:active { transform: translateY(-1px) scale(.98); }
+@keyframes xelox-fab-in { from { opacity: 0; transform: scale(.6) translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes xelox-fab-pulse { 0% { transform: scale(1); opacity: .5; } 70%, 100% { transform: scale(1.7); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+	.xelox-fab { animation: none; } .xelox-fab::before { animation: none; display: none; }
+}
+
+/* ============================================================
+   SCOPE LIST
+   ============================================================ */
+.xelox-scope-list {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 12px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.xelox-scope-list__item {
+	display: flex;
+	gap: 12px;
+	align-items: flex-start;
+	background: #fff;
+	border: 1px solid #e5e8f0;
+	border-radius: 12px;
+	padding: 16px 18px;
+	font-size: 0.9375rem;
+	font-weight: 500;
+	color: var(--c-ink);
+	line-height: 1.45;
+}
+
+.xelox-scope-list__check {
+	width: 22px;
+	height: 22px;
+	flex-shrink: 0;
+	background: var(--c-brand-soft);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--c-brand);
+	margin-top: 1px;
+}
+
+/* ============================================================
+   STEPS
+   ============================================================ */
+.xelox-steps {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0;
+	position: relative;
+}
+
+.xelox-steps::before {
+	content: "";
+	position: absolute;
+	top: 32px;
+	left: calc(33.33% / 2);
+	right: calc(33.33% / 2);
+	height: 2px;
+	background: linear-gradient(90deg, var(--c-brand-soft), var(--c-brand), var(--c-brand-soft));
+	z-index: 0;
+}
+
+.xelox-step {
+	background: #fff;
+	border: 1px solid #e5e8f0;
+	border-radius: 16px;
+	padding: 32px 28px 28px;
+	position: relative;
+	z-index: 1;
+	margin: 0 8px;
+}
+
+.xelox-step__num {
+	width: 48px;
+	height: 48px;
+	background: var(--c-gradient);
+	color: #fff;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.125rem;
+	font-weight: 800;
+	margin-bottom: 20px;
+	box-shadow: 0 4px 16px rgba(22,31,54, .3);
+}
+
+.xelox-step__h {
+	font-size: 1.0625rem;
+	font-weight: 700;
+	color: var(--c-ink);
+	margin: 0 0 10px;
+}
+
+.xelox-step p {
+	font-size: 0.9375rem;
+	color: var(--c-muted);
+	line-height: 1.6;
+	margin: 0;
+}
+
+/* ============================================================
+   ACCORDION
+   ============================================================ */
+.xelox-accordion {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.xelox-accordion__item {
+	border: 1px solid #e5e8f0;
+	border-radius: 12px;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.xelox-accordion__head {
+	width: 100%;
+	background: none;
+	border: none;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 18px 22px;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--c-ink);
+	text-align: left;
+	gap: 16px;
+	transition: background 150ms ease, color 150ms ease;
+}
+
+.xelox-accordion__head:hover { background: var(--c-bg-alt); }
+.xelox-accordion__head[aria-expanded="true"] { color: var(--c-brand); }
+
+.xelox-accordion__head svg {
+	flex-shrink: 0;
+	transition: transform 220ms ease;
+}
+
+.xelox-accordion__head[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+.xelox-accordion__panel {
+	padding: 0 22px 18px;
+}
+
+.xelox-accordion__panel p {
+	font-size: 0.9375rem;
+	color: var(--c-muted);
+	line-height: 1.6;
+	margin: 0;
+}
+
+/* ============================================================
+   FORM WRAP
+   ============================================================ */
+.xelox-form-wrap {
+	background: #fff;
+	border: 1px solid #e5e8f0;
+	border-radius: 20px;
+	padding: 48px;
+	max-width: 680px;
+	margin-inline: auto;
+}
+
+/* ── FAB telefon = rozmiar spójny z widgetem cookie; cookie ukryte na mobile ── */
+.xelox-fab { width: 56px; height: 56px; }
+.cky-btn-revisit-wrapper { width: 56px !important; height: 56px !important; }
+.cky-btn-revisit-wrapper img, .cky-btn-revisit-wrapper svg { width: 26px !important; height: 26px !important; }
+@media (max-width: 782px) {
+	.cky-btn-revisit-wrapper, .cky-btn-revisit { display: none !important; }
+}

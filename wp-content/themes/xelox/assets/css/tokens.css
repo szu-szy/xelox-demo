@@ -1,0 +1,86 @@
+/* ============================================================
+   TOKENS — XELOX Ubezpieczenia · Aurora design system.
+   ============================================================ */
+:root {
+	/* ── KOLORY ── (Modins-inspired: indigo + cyan) */
+	/* Marka XELOX (z logo): cyjan #2babe3 + royal #2c4d9b, gradient logo. */
+	--c-brand:        #2babe3;        /* cyjan z logo */
+	--c-brand-hover:  #1f9ad0;
+	--c-brand-soft:   #e4f4fb;
+	--c-brand-ink:    #12729e;        /* głębszy cyjan — tekst/linki, AA na białym (~4.9:1) */
+	--c-royal:        #2c4d9b;        /* niebieski royal z logo */
+	/* Ink / ciemne pasy / stopka — ciemny granat royal. */
+	--c-ink:          #22376f;
+	--c-ink-soft:     #45527d;
+	--c-muted:        #5b6472;        /* ciemniejszy szary — AA na białym (~4.7:1) */
+	--c-line:         #e6e8ef;
+	--c-line-cool:    #e6e8ef;
+	--c-bg:           #ffffff;
+	--c-bg-alt:       #f3f5f9;
+	--c-card:         #ffffff;
+	--c-navy:         #1e2f61;        /* ciemne sekcje / stopka */
+	--c-navy-2:       #2c4d9b;        /* royal do warstwowania */
+	--c-gradient:     linear-gradient(120deg,#2c4d9b 0%,#2babe3 100%); /* gradient logo */
+	--c-on-brand:     #ffffff;
+	/* Semantyczne */
+	--c-success:      #1f9d55;
+	--c-warning:      #b8860b;
+	--c-danger:       #c0392b;
+
+	/* ── TYPOGRAFIA ── (Kumbh Sans — geometric humanist sans) */
+	--font-display: "Kumbh Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+	--font-body:    "Kumbh Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+	--fw-regular: 400;
+	--fw-medium:  500;
+	--fw-semibold:600;
+	--fw-bold:    700;
+	/* Skala */
+	--text-xs:  0.75rem;   /* 12 — eyebrow */
+	--text-sm:  0.9375rem; /* 15 */
+	--text-base:1.0625rem; /* 17 */
+	--text-lg:  1.375rem;  /* 22 */
+	--text-xl:  2.25rem;   /* 36 */
+	--text-2xl: clamp(2.5rem, 4vw + 1rem, 4.4rem); /* hero */
+	--lh-tight: 1.1;
+	--lh-body:  1.7;
+	--ls-tight: -0.02em;
+	--ls-hero:  -0.025em;
+	--ls-eyebrow: 0.14em;
+
+	/* ── SPACING (skala 4/8) ── */
+	--sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+	--sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+	/* ── ZAOKRĄGLENIA ── kanciaste (logo = ostry kwadrat + geometryczny X) */
+	--radius-sm:  2px;
+	--radius-md:  3px;
+	--radius-lg:  4px;
+	--radius-xl:  6px;
+	--radius-pill: 999px;
+
+	/* Depth — soft, low, navy-tinted */
+	--shadow-card:  0 1px 2px rgba(10,28,51,.04), 0 8px 24px rgba(10,28,51,.05);
+	--shadow-lift:  0 2px 4px rgba(10,28,51,.06), 0 18px 44px rgba(10,28,51,.10);
+	--shadow-modal: 0 24px 60px rgba(10,28,51,.20);
+
+	/* ── MOTION ── */
+	--dur-fast: 150ms;
+	--dur-base: 220ms;
+	--dur-slow: 420ms;
+	--ease: cubic-bezier(.22,.61,.36,1);
+	--ease-out: cubic-bezier(.16,1,.3,1);
+
+	/* ── LAYOUT ── */
+	--container: 1200px;
+	--container-narrow: 760px;
+	--header-h: 76px;
+	--topbar-h: 44px;
+	--z-header: 100;
+	--z-drawer: 200;
+	--z-modal: 300;
+	--z-toast: 400;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:root { --dur-fast: 0ms; --dur-base: 0ms; --dur-slow: 0ms; }
+}

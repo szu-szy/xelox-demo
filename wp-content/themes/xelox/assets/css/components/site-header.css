@@ -1,0 +1,135 @@
+/* ── Top utility bar (cyan) ── */
+.xelox-topbar {
+	position: fixed; top: 0; left: 0; right: 0; z-index: calc(var(--z-header) + 1);
+	height: var(--topbar-h);
+	background: var(--c-brand);
+	color: #fff;
+	font-size: 0.8125rem;
+	transition: transform var(--dur-base) var(--ease);
+}
+/* Po przewinięciu: topbar chowa się, sticky header zostaje sam na górze */
+html.is-scrolled .xelox-topbar { transform: translateY(-100%); }
+.xelox-topbar__inner { display: flex; align-items: center; justify-content: space-between; height: 100%; gap: var(--sp-5); }
+.xelox-topbar__info, .xelox-topbar__meta { display: flex; align-items: center; gap: var(--sp-5); }
+.xelox-topbar a, .xelox-topbar span { color: #fff; }
+.xelox-topbar__info span, .xelox-topbar__meta a { display: inline-flex; align-items: center; gap: 7px; font-weight: 500; }
+.xelox-topbar svg { opacity: .9; }
+.xelox-topbar__meta a:hover { color: var(--c-ink); }
+.xelox-topbar__claim { font-weight: 700; padding: 4px 14px; border: 1.5px solid rgba(255,255,255,.55); border-radius: 999px; transition: background var(--dur-base) var(--ease), color var(--dur-base) var(--ease); }
+.xelox-topbar__claim:hover { background: #fff; color: var(--c-brand-ink); }
+.xelox-topbar__social { display: inline-flex; gap: 8px; }
+.xelox-topbar__social a { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.18); display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; text-transform: lowercase; }
+.xelox-topbar__social a:hover { background: #fff; color: var(--c-brand-ink); }
+
+/* ── Header (fixed, below top bar) ── */
+.xelox-header {
+	position: fixed; top: var(--topbar-h); left: 0; right: 0; z-index: var(--z-header);
+	height: var(--header-h);
+	background: color-mix(in srgb, var(--c-bg) 92%, transparent);
+	backdrop-filter: saturate(1.4) blur(10px);
+	border-bottom: 1px solid var(--c-line);
+	transition: border-color var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease), background var(--dur-base) var(--ease), top var(--dur-base) var(--ease);
+}
+.xelox-header.is-scrolled { border-bottom-color: var(--c-line); box-shadow: var(--shadow-card); }
+html.is-scrolled .xelox-header { top: 0; }              /* wjeżdża na miejsce topbara */
+@media (max-width: 1024px) { .xelox-header { top: 0; } } /* mobile: topbar ukryty, header na górze */
+.xelox-header__inner { display: flex; align-items: center; gap: var(--sp-5); height: 100%; }
+.xelox-header__brand { display: flex; align-items: center; }
+.xelox-header__brand img { max-height: 44px; width: auto; }
+.xelox-header__logo-img { height: 46px; width: auto; display: block; }
+@media (max-width: 560px) { .xelox-header__logo-img { height: 38px; } }
+.xelox-header__title { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--text-lg); color: var(--c-ink); letter-spacing: var(--ls-tight); }
+.xelox-header__nav { margin-left: auto; }
+
+.xelox-menu { display: flex; align-items: center; gap: var(--sp-5); list-style: none; }
+.xelox-menu a { font-weight: var(--fw-medium); color: var(--c-ink); font-size: var(--text-sm); position: relative; }
+.xelox-menu a::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: var(--c-brand); border-radius: 2px; transition: width var(--dur-base) var(--ease); }
+.xelox-menu a:hover::after, .xelox-menu .current-menu-item > a::after { width: 100%; }
+
+.xelox-header__actions { display: flex; align-items: center; gap: var(--sp-4); }
+
+/* Call experts block */
+.xelox-header__call { display: inline-flex; align-items: center; gap: 11px; }
+.xelox-header__call-ico { width: 42px; height: 42px; border-radius: 50%; background: var(--c-brand-soft); color: var(--c-brand-ink); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; transition: background var(--dur-base) var(--ease), color var(--dur-base) var(--ease); }
+.xelox-header__call:hover .xelox-header__call-ico { background: var(--c-brand); color: #fff; }
+.xelox-header__call-txt { display: flex; flex-direction: column; line-height: 1.15; }
+.xelox-header__call-txt small { font-size: 0.7rem; color: var(--c-muted); font-weight: 500; }
+.xelox-header__call-txt strong { font-size: 0.95rem; color: var(--c-ink); font-weight: 700; }
+
+/* Burger */
+.xelox-burger { display: none; width: 44px; height: 44px; border: 0; background: transparent; flex-direction: column; gap: 5px; align-items: center; justify-content: center; cursor: pointer; border-radius: var(--radius-md); }
+.xelox-burger span { width: 24px; height: 2px; background: var(--c-ink); border-radius: 2px; transition: transform var(--dur-base) var(--ease), opacity var(--dur-base) var(--ease); }
+
+@media (max-width: 1200px) {
+	.xelox-header__call-txt { display: none; }
+}
+@media (max-width: 1024px) {
+	.xelox-topbar { display: none; }
+	.xelox-header__nav { display: none; }
+	.xelox-header__cta { display: none; }
+	.xelox-header__call { display: none; }
+	.xelox-burger { display: flex; }
+	.xelox-header__actions { margin-left: auto; }   /* hamburger dosunięty do prawej krawędzi */
+}
+
+/* ikony w okrągłych/kwadratowych kontenerach — wyśrodkowanie (bez baseline gap) */
+.xelox-header__call-ico svg { display: block; }
+
+/* ═══════════ MEGA MENU „Oferta" (desktop) ═══════════ */
+.xelox-has-mega { position: relative; }
+.xelox-has-mega > a { display: inline-flex; align-items: center; gap: 5px; }
+/* prawdziwa strzałka (chevron), niekolizyjna z podkreśleniem ::after menu */
+.xelox-menu__caret { display: inline-flex; align-items: center; }
+.xelox-menu__caret-svg { transform: rotate(90deg); transition: transform var(--dur-base) var(--ease); }
+.xelox-has-mega:hover .xelox-menu__caret-svg, .xelox-has-mega:focus-within .xelox-menu__caret-svg { transform: rotate(-90deg); }
+/* podkreślenie (::after) niech omija obszar strzałki */
+.xelox-has-mega > a::after { right: 18px; }
+
+.xelox-mega {
+	position: absolute; top: calc(100% + 16px); left: 50%;
+	transform: translateX(-50%) translateY(8px);
+	width: min(760px, 92vw);
+	background: #fff; border: 1px solid var(--c-line); border-radius: var(--radius-xl);
+	box-shadow: 0 30px 70px -20px rgba(30,47,97,.28);
+	padding: 18px; z-index: 300;
+	opacity: 0; visibility: hidden; pointer-events: none;
+	transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease), visibility 0s linear var(--dur-base);
+}
+.xelox-mega::before {
+	content: ""; position: absolute; top: -8px; left: 50%; transform: translateX(-50%) rotate(45deg);
+	width: 16px; height: 16px; background: #fff;
+	border-left: 1px solid var(--c-line); border-top: 1px solid var(--c-line);
+}
+/* mostek nad panelem — hover nie gubi się w luce */
+.xelox-mega::after { content: ""; position: absolute; top: -18px; left: 0; right: 0; height: 18px; }
+.xelox-has-mega:hover .xelox-mega, .xelox-has-mega:focus-within .xelox-mega {
+	opacity: 1; visibility: visible; pointer-events: auto;
+	transform: translateX(-50%) translateY(0);
+	transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
+}
+.xelox-mega__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.xelox-mega__item {
+	display: flex; align-items: flex-start; gap: 12px; padding: 11px 12px;
+	border-radius: 12px; text-decoration: none; color: var(--c-ink);
+	transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.xelox-mega__item:hover { background: var(--c-brand-soft); transform: translateX(2px); }
+.xelox-mega__ico {
+	flex: 0 0 auto; width: 40px; height: 40px; border-radius: 10px;
+	display: grid; place-items: center; background: var(--c-brand-soft); color: var(--c-brand);
+	transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.xelox-mega__item:hover .xelox-mega__ico { background: var(--c-brand); color: #fff; transform: scale(1.06); }
+.xelox-mega__txt { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.xelox-mega__txt strong { font-size: 0.95rem; font-weight: 700; line-height: 1.25; color: var(--c-ink); }
+.xelox-mega__txt small { font-size: 0.78rem; color: var(--c-muted); line-height: 1.35; }
+.xelox-mega__all {
+	display: inline-flex; align-items: center; gap: 7px; margin: 12px 0 2px 12px;
+	font-weight: 700; color: var(--c-brand-ink); text-decoration: none; font-size: 0.9rem;
+	transition: gap var(--dur-fast) var(--ease);
+}
+.xelox-mega__all:hover { gap: 12px; }
+.xelox-mega__all span { transition: transform var(--dur-fast) var(--ease); }
+.xelox-mega__all:hover span { transform: translateX(3px); }
+@media (max-width: 1024px) { .xelox-mega, .xelox-has-mega > a::after { display: none; } }
+@media (prefers-reduced-motion: reduce) { .xelox-mega { transition: opacity var(--dur-base) linear; } }

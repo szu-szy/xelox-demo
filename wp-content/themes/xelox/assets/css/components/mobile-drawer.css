@@ -1,0 +1,94 @@
+/**
+ * Mobilny drawer — premium slide-in (NASZ STANDARD, port z Magic Gym/Stalver).
+ * Panel z prawej + overlay; mechanizm `is-open` (assets/js/modules/mobile-drawer.js).
+ * Tokeny generyczne + color-mix → adaptuje light/dark przy re-skinie. z-index ponad bottom-bar/cookie.
+ */
+
+.xelox-drawer {
+	position: fixed; inset: 0; z-index: 1200;
+	/* Mapowanie tokenów startera → XELOX (drawer był portem i używał --c-primary/--c-fg/--c-on-primary,
+	   których motyw nie ma → tła i akcenty były niewidoczne). */
+	--c-primary: #0f78a6;              /* dostępny brand-blue (biały tekst AA) */
+	--c-on-primary: #fff;
+	--c-fg: var(--c-ink);
+	--c-bg: #fff;
+}
+.xelox-drawer[hidden] { display: none; }
+
+.xelox-drawer__overlay { position: absolute; inset: 0; background: rgba(8, 12, 10, .6); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); opacity: 0; transition: opacity .42s cubic-bezier(.32,.72,.24,1); }
+.xelox-drawer.is-open .xelox-drawer__overlay { opacity: 1; }
+
+.xelox-drawer__panel { position: absolute; inset: 0; background: var(--c-bg, #fff); color: var(--c-fg, #1a1a1a); transform: translateX(100%); transition: transform .42s cubic-bezier(.32,.72,.24,1); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.xelox-drawer.is-open .xelox-drawer__panel { transform: translateX(0); }
+
+.xelox-drawer__inner { display: flex; flex-direction: column; gap: 1.75rem; padding: 1rem 1.25rem 2.5rem; max-width: 520px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; }
+
+/* Stagger reveal */
+.xelox-drawer.is-open .xelox-drawer__inner > * { animation: xelox-drawer-in .5s cubic-bezier(.16,1,.3,1) backwards; }
+.xelox-drawer.is-open .xelox-drawer__inner > *:nth-child(1) { animation-delay: .06s; }
+.xelox-drawer.is-open .xelox-drawer__inner > *:nth-child(2) { animation-delay: .13s; }
+.xelox-drawer.is-open .xelox-drawer__inner > *:nth-child(3) { animation-delay: .2s; }
+.xelox-drawer.is-open .xelox-drawer__inner > *:nth-child(4) { animation-delay: .27s; }
+.xelox-drawer.is-open .xelox-drawer__inner > *:nth-child(5) { animation-delay: .34s; }
+.xelox-drawer.is-open .xelox-drawer__inner > *:nth-child(6) { animation-delay: .41s; }
+@keyframes xelox-drawer-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Header */
+.xelox-drawer__header { display: flex; align-items: center; justify-content: space-between; padding: .25rem 0 .5rem; }
+.xelox-drawer__logo { display: inline-flex; align-items: center; line-height: 0; font-family: var(--font-display); font-size: 1.1rem; color: var(--c-fg); text-decoration: none; }
+.xelox-drawer__logo img { display: block; height: 40px; width: auto; }
+.xelox-drawer__close { width: 48px; height: 48px; border-radius: 50%; background: var(--c-primary); border: 0; color: var(--c-on-primary, #fff); cursor: pointer; display: grid; place-items: center; box-shadow: 0 6px 20px color-mix(in srgb, var(--c-primary) 32%, transparent); transition: transform .3s var(--ease), box-shadow .22s var(--ease); }
+.xelox-drawer__close:hover, .xelox-drawer__close:focus-visible { transform: rotate(90deg) scale(1.05); box-shadow: 0 10px 28px color-mix(in srgb, var(--c-primary) 50%, transparent); outline: none; }
+
+/* Sekcje + eyebrow z kreską */
+.xelox-drawer__section { display: flex; flex-direction: column; gap: .5rem; }
+.xelox-drawer__eyebrow { display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--c-fg); padding: 0 4px; margin-bottom: 10px; line-height: 1.1; }
+.xelox-drawer__eyebrow::before { content: ""; display: inline-block; width: 28px; height: 3px; background: var(--c-primary); border-radius: 2px; }
+
+/* Nav list (wp_nav_menu → karty + strzałka ::after) */
+.xelox-drawer__list { display: flex; flex-direction: column; gap: 4px; list-style: none; padding: 0; margin: 0; }
+.xelox-drawer__list li { margin: 0; }
+.xelox-drawer__list a { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; font-family: var(--font-display); font-size: 1.16rem; font-weight: 600; color: var(--c-fg); text-decoration: none; border-radius: 12px; border: 1px solid transparent; background: color-mix(in srgb, var(--c-fg) 4%, transparent); transition: background .2s var(--ease), border-color .2s var(--ease), padding-left .2s var(--ease); }
+.xelox-drawer__list a::after { content: "→"; color: var(--c-primary); opacity: .5; transition: transform .2s var(--ease), opacity .2s var(--ease); }
+.xelox-drawer__list a:hover, .xelox-drawer__list a:focus-visible { background: color-mix(in srgb, var(--c-primary) 12%, transparent); border-color: color-mix(in srgb, var(--c-primary) 45%, transparent); padding-left: 22px; outline: none; }
+.xelox-drawer__list a:hover::after { opacity: 1; transform: translateX(4px); }
+
+/* Oferta chipy 2-kol */
+.xelox-drawer__services { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.xelox-drawer__service { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 10px; background: color-mix(in srgb, var(--c-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--c-fg) 10%, transparent); text-decoration: none; color: var(--c-muted, inherit); font-family: var(--font-display); font-size: .92rem; min-height: 48px; transition: background .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease), transform .2s var(--ease); }
+.xelox-drawer__service:hover, .xelox-drawer__service:focus-visible { background: color-mix(in srgb, var(--c-primary) 12%, transparent); border-color: color-mix(in srgb, var(--c-primary) 50%, transparent); color: var(--c-fg); transform: translateY(-1px); outline: none; }
+.xelox-drawer__service-icon { display: grid; place-items: center; width: 32px; height: 32px; flex-shrink: 0; border-radius: 8px; background: var(--c-primary); color: var(--c-on-primary, #fff); }
+.xelox-drawer__service-icon svg { width: 18px; height: 18px; }
+
+/* CTA */
+.xelox-drawer__cta { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 17px 22px; width: 100%; border-radius: 14px; background: var(--c-primary); color: var(--c-on-primary, #fff); font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; text-decoration: none; box-shadow: 0 12px 30px color-mix(in srgb, var(--c-primary) 38%, transparent); transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+.xelox-drawer__cta:hover, .xelox-drawer__cta:focus-visible { transform: translateY(-2px); box-shadow: 0 18px 40px color-mix(in srgb, var(--c-primary) 50%, transparent); outline: none; }
+
+/* Kontakt karty */
+.xelox-drawer__contact { display: flex; flex-direction: column; gap: 8px; padding-top: 1.25rem; border-top: 1px solid color-mix(in srgb, var(--c-fg) 10%, transparent); }
+.xelox-drawer__contact-item { display: flex; align-items: center; gap: 14px; padding: 13px 16px; border-radius: 12px; background: color-mix(in srgb, var(--c-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--c-fg) 10%, transparent); color: var(--c-fg); text-decoration: none; transition: background .2s var(--ease), border-color .2s var(--ease); }
+.xelox-drawer__contact-item:hover, .xelox-drawer__contact-item:focus-visible { background: color-mix(in srgb, var(--c-fg) 8%, transparent); border-color: color-mix(in srgb, var(--c-primary) 45%, transparent); outline: none; }
+.xelox-drawer__contact-item svg { flex-shrink: 0; color: var(--c-primary); }
+.xelox-drawer__contact-label { font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 2px; }
+.xelox-drawer__contact-value { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--c-fg); }
+
+/* Info */
+.xelox-drawer__info { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 12px; background: color-mix(in srgb, var(--c-fg) 4%, transparent); border: 1px solid color-mix(in srgb, var(--c-fg) 10%, transparent); }
+.xelox-drawer__info-row { display: flex; align-items: flex-start; gap: 10px; font-size: .85rem; color: var(--c-muted); line-height: 1.45; }
+.xelox-drawer__info-row svg { flex-shrink: 0; margin-top: 2px; color: var(--c-primary); opacity: .85; }
+
+/* Otwarty drawer zasłania bottom-bar/cookie (per reguła stackingu) */
+body.xelox-drawer-open, body:has(.xelox-drawer.is-open) { overflow: hidden; }
+.xelox-drawer.is-open ~ .xelox-mobar, body:has(.xelox-drawer.is-open) .xelox-mobar,
+body:has(.xelox-drawer.is-open) .cky-btn-revisit-wrapper, body:has(.xelox-drawer.is-open) .cky-revisit-bottom-left { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+	.xelox-drawer__panel, .xelox-drawer__overlay, .xelox-drawer__inner > * { transition: opacity .2s ease !important; animation: none !important; }
+	.xelox-drawer__panel { transform: none; opacity: 0; }
+	.xelox-drawer.is-open .xelox-drawer__panel { opacity: 1; }
+}
+
+/* Desktopowe mega-menu i strzałka NIE należą do drawera —
+   usługi pokazujemy w sekcji „Oferta" (chipy). */
+.xelox-drawer .xelox-mega,
+.xelox-drawer .xelox-menu__caret { display: none !important; }

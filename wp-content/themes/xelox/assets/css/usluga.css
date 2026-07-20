@@ -1,0 +1,319 @@
+/* ══════════════════════════════════════════════
+   XELOX — Strona usługi (single-usluga.php)
+   ══════════════════════════════════════════════ */
+
+/* svc-hero — styles live in front-page.css (loaded on service pages) */
+
+/* ── Intro + sidebar ── */
+.xelox-svc-intro { padding: clamp(48px, 6vw, 80px) 0; }
+.xelox-svc-intro__grid { display: grid; grid-template-columns: 1fr 340px; gap: clamp(36px, 4vw, 64px); align-items: start; }
+.xelox-svc-intro__lead { font-size: 1.125rem; line-height: 1.7; color: var(--c-ink-soft); margin: 0 0 var(--sp-4); max-width: 64ch; }
+.xelox-svc-intro__h { font-size: 1.6rem; margin: var(--sp-7) 0 0; }
+.xelox-svc-intro__target { font-size: 1.0625rem; line-height: 1.7; color: var(--c-ink-soft); margin: var(--sp-4) 0 0; }
+
+/* price callout */
+.xelox-svc-price { display: flex; gap: 14px; align-items: flex-start; margin-top: var(--sp-6); background: var(--c-brand-soft); border-radius: var(--radius-lg); padding: 20px 22px; }
+.xelox-svc-price__ico { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 4px; background: var(--c-brand); color: #fff; display: flex; align-items: center; justify-content: center; }
+.xelox-svc-price p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--c-ink); font-weight: 500; }
+
+/* sticky aside card */
+.xelox-svc-aside { position: sticky; top: calc(var(--header-h) + var(--topbar-h) + 16px); }
+.xelox-svc-card { background: var(--c-ink); border-radius: var(--radius-xl); padding: 30px 28px; color: #fff; }
+.xelox-svc-card__title { font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 18px; }
+.xelox-svc-card__list { list-style: none; display: flex; flex-direction: column; gap: 12px; padding: 0; margin: 0 0 24px; }
+.xelox-svc-card__list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9375rem; font-weight: 500; color: rgba(255,255,255,.9); line-height: 1.4; }
+.xelox-svc-card__list svg { color: var(--c-brand); flex: 0 0 auto; margin-top: 1px; }
+.xelox-svc-card__call { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 14px; color: #fff; font-size: 0.95rem; }
+.xelox-svc-card__call svg { color: var(--c-brand); }
+.xelox-svc-card__call strong { color: #fff; }
+
+/* ── Scope list ── */
+.xelox-scope-list {
+	display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+	margin-top: var(--sp-5); list-style: none; padding: 0;
+}
+.xelox-scope-list__item {
+	display: flex; align-items: center; gap: var(--sp-3);
+	font-size: var(--text-sm); font-weight: 600; color: var(--c-ink);
+	background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius-md);
+	padding: 16px 18px;
+}
+.xelox-scope-list__check {
+	flex-shrink: 0; width: 24px; height: 24px; background: var(--c-brand-soft);
+	border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--c-brand-ink);
+}
+
+/* ── Steps ── */
+.xelox-svc-process { background: var(--c-bg-alt); }
+.xelox-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); }
+.xelox-step { text-align: center; padding: var(--sp-6); background: #fff; border: 1px solid var(--c-line); border-radius: var(--radius-xl); }
+.xelox-step__num {
+	display: inline-flex; align-items: center; justify-content: center;
+	width: 52px; height: 52px; border-radius: 4px;
+	background: var(--c-brand-soft); color: var(--c-brand-ink);
+	font-size: 1.2rem; font-weight: 800; margin-bottom: var(--sp-4);
+}
+.xelox-step__h { font-size: 1.2rem; font-weight: 700; color: var(--c-ink); margin: 0 0 var(--sp-2); }
+.xelox-step p { font-size: var(--text-sm); color: var(--c-muted); line-height: 1.6; margin: 0; }
+
+/* ── Related ── */
+.xelox-svc-related__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.xelox-svc-related .xelox-bcard__media { aspect-ratio: 16/7; }
+
+/* ── Form wrap ── */
+.xelox-form-wrap { background: #fff; border: 1px solid var(--c-line); border-radius: var(--radius-xl); padding: clamp(24px, 3vw, 40px); box-shadow: var(--shadow-card); }
+
+/* ── Claim links (likwidacja szkód) ── */
+.xelox-claimlinks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.xelox-claimlinks__item {
+	display: flex; align-items: center; justify-content: space-between; gap: 10px;
+	background: #fff; border: 1px solid var(--c-line); border-radius: var(--radius-md);
+	padding: 16px 18px; text-decoration: none;
+	transition: transform var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+}
+.xelox-claimlinks__item:hover { transform: translateY(-3px); border-color: var(--c-brand); box-shadow: var(--shadow-card); }
+.xelox-claimlinks__name { font-weight: 700; color: var(--c-ink); font-size: 0.95rem; }
+.xelox-claimlinks__go { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 4px; background: var(--c-brand-soft); color: var(--c-brand-ink); display: flex; align-items: center; justify-content: center; transition: background var(--dur-base) var(--ease), color var(--dur-base) var(--ease); }
+.xelox-claimlinks__item:hover .xelox-claimlinks__go { background: var(--c-brand); color: #fff; }
+@media (max-width: 900px) { .xelox-claimlinks { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .xelox-claimlinks { grid-template-columns: 1fr; } }
+
+/* ── Team grid (o-nas page) ── */
+.xelox-team-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--sp-5);
+	align-items: stretch;
+}
+@media (max-width: 900px) { .xelox-team-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .xelox-team-grid { grid-template-columns: 1fr; } }
+
+.xelox-team-card {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	background: #fff;
+	border: 1px solid var(--c-line);
+	border-radius: var(--radius-xl);
+	overflow: hidden;                 /* zdjęcie edge-to-edge kafelka */
+	box-shadow: var(--shadow-card);
+	transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease);
+}
+.xelox-team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); border-color: color-mix(in srgb, var(--c-brand) 32%, transparent); }
+
+/* ZDJĘCIE — pełna szerokość kafelka, gotowe na podmianę na <img> (object-fit: cover) */
+.xelox-team-card__photo {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	display: grid;
+	place-items: center;
+	background: linear-gradient(160deg, color-mix(in srgb, var(--c-brand) 13%, #fff), color-mix(in srgb, var(--c-brand) 4%, #fff));
+	color: color-mix(in srgb, var(--c-brand) 42%, transparent);
+	overflow: hidden;
+}
+.xelox-team-card__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.xelox-avatar-ph { width: 44%; height: 44%; opacity: .92; transition: transform var(--dur-slow) var(--ease); }
+.xelox-team-card:hover .xelox-avatar-ph { transform: scale(1.05); }
+
+/* DANE — pod zdjęciem, z porządnym oddechem */
+.xelox-team-card__body { display: flex; flex-direction: column; gap: 3px; padding: 20px 22px 22px; }
+.xelox-team-card__badge {
+	display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
+	padding: 5px 11px; margin-bottom: 7px; border-radius: 999px;
+	background: var(--c-brand-soft); color: var(--c-brand-ink);
+	font-size: 0.72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+}
+.xelox-team-card__badge svg { flex: 0 0 auto; }
+.xelox-team-card__name { font-size: 1.15rem; font-weight: 700; color: var(--c-ink); margin: 0; line-height: 1.25; }
+.xelox-team-card__role { font-size: var(--text-sm); color: var(--c-muted); margin: 2px 0 0; line-height: 1.5; }
+.xelox-team-card__contact {
+	display: flex; flex-direction: column; align-items: flex-start; gap: 7px;
+	margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--c-line);
+}
+.xelox-team-card__phone, .xelox-team-card__mail {
+	display: inline-flex; align-items: center; gap: 8px;
+	font-size: var(--text-sm); color: var(--c-ink);
+	transition: color var(--dur-fast) var(--ease), gap var(--dur-fast) var(--ease);
+}
+.xelox-team-card__phone { font-weight: 700; color: var(--c-brand-ink); }
+.xelox-team-card__phone svg, .xelox-team-card__mail svg { color: var(--c-brand); flex: 0 0 auto; }
+.xelox-team-card__mail { font-size: 0.82rem; color: var(--c-muted); }
+.xelox-team-card__phone:hover, .xelox-team-card__mail:hover { color: var(--c-brand-ink); gap: 10px; }
+
+/* PREZES — wyróżniony kafelek na całą szerokość (3 kolumny), układ poziomy */
+.xelox-team-card--featured {
+	grid-column: 1 / -1;
+	flex-direction: row;
+	border-color: color-mix(in srgb, var(--c-brand) 28%, transparent);
+	box-shadow: var(--shadow-lift);
+}
+.xelox-team-card--featured .xelox-team-card__photo { flex: 0 0 38%; max-width: 360px; aspect-ratio: auto; align-self: stretch; min-height: 240px; }
+.xelox-team-card--featured .xelox-avatar-ph { width: 128px; height: 128px; }
+.xelox-team-card--featured .xelox-team-card__body { justify-content: center; padding: clamp(24px, 3.2vw, 44px); gap: 5px; }
+.xelox-team-card--featured .xelox-team-card__name { font-size: clamp(1.5rem, 2.4vw, 2rem); font-family: var(--font-display); line-height: 1.15; }
+.xelox-team-card--featured .xelox-team-card__role { font-size: 1rem; max-width: 48ch; }
+.xelox-team-card--featured .xelox-team-card__contact { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 10px 30px; }
+@media (max-width: 640px) {
+	.xelox-team-card--featured { flex-direction: column; }
+	.xelox-team-card--featured .xelox-team-card__photo { flex: none; max-width: none; width: 100%; aspect-ratio: 4 / 3; min-height: 0; }
+	.xelox-team-card--featured .xelox-team-card__contact { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── Partners grid ── */
+.xelox-partners-grid {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: var(--sp-4);
+	margin-top: var(--sp-6);
+}
+
+.xelox-partner-placeholder {
+	background: var(--c-bg);
+	border-radius: var(--radius-sm);
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.75rem;
+	color: var(--c-muted);
+}
+
+/* ── Contact grid ── */
+.xelox-contact__grid {
+	display: grid;
+	grid-template-columns: 1.1fr 1fr;
+	gap: clamp(36px, 4vw, 64px);
+	align-items: start;
+}
+.xelox-contact__list { list-style: none; display: flex; flex-direction: column; gap: 4px; padding: 0; margin: 0 0 var(--sp-5); }
+.xelox-contact__item { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--c-line); }
+.xelox-contact__item:last-child { border-bottom: none; }
+.xelox-contact__ico { flex: 0 0 auto; width: 46px; height: 46px; border-radius: 3px; background: var(--c-brand-soft); color: var(--c-brand-ink); display: flex; align-items: center; justify-content: center; }
+.xelox-contact__item strong { display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--c-muted); margin-bottom: 4px; }
+.xelox-contact__item p { margin: 0; color: var(--c-ink); line-height: 1.6; }
+.xelox-contact__item a { color: var(--c-ink); font-weight: 600; }
+.xelox-contact__item a:hover { color: var(--c-brand-ink); }
+
+/* full-width map */
+.xelox-contact__mapwrap { line-height: 0; }
+.xelox-contact__mapwrap iframe { filter: grayscale(.2); }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+	.xelox-svc-intro__grid { grid-template-columns: 1fr; }
+	.xelox-svc-aside { position: static; max-width: 460px; }
+}
+@media (max-width: 900px) {
+	.xelox-steps { grid-template-columns: 1fr; }
+	.xelox-scope-list { grid-template-columns: 1fr; }
+	.xelox-svc-related__grid { grid-template-columns: 1fr; max-width: 560px; }
+	.xelox-team-grid { grid-template-columns: repeat(2, 1fr); }
+	.xelox-partners-grid { grid-template-columns: repeat(4, 1fr); }
+	.xelox-contact__grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+	.xelox-team-grid { grid-template-columns: 1fr; }   /* telefon: 1 kolumna (kafelki nie ściśnięte) */
+	.xelox-partners-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── Thank-you "co dalej" steps ── */
+.xelox-ty-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: var(--sp-7); }
+.xelox-ty-step { display: inline-flex; align-items: center; gap: 10px; background: var(--c-bg-alt); border: 1px solid var(--c-line); border-radius: 999px; padding: 10px 18px 10px 10px; font-size: 0.9rem; font-weight: 600; color: var(--c-ink); }
+.xelox-ty-step span { width: 26px; height: 26px; border-radius: 4px; background: var(--c-brand); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+
+/* ═══════════ Tematyczne ZDJĘCIE TŁA w hero podstron ═══════════ */
+.xelox-page-hero, .xelox-svc-hero { isolation: isolate; }
+.xelox-hero-bg {
+	position: absolute; inset: 0; width: 100%; height: 100%;
+	object-fit: cover; z-index: -2; opacity: .42;
+}
+.xelox-hero-bg__scrim {
+	position: absolute; inset: 0; z-index: -1;
+	background: linear-gradient(115deg, rgba(21,31,62,.94) 0%, rgba(21,31,62,.82) 55%, rgba(24,38,78,.6) 100%);
+}
+
+/* ── FAQ + Wycena — jedna połączona sekcja (2 kolumny) ── */
+.xelox-svc-faqform__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(32px, 4vw, 56px); align-items: start; }
+.xelox-svc-faqform__h { font-size: clamp(1.5rem, 2vw + .5rem, 2rem); line-height: 1.2; margin: 10px 0 22px; color: var(--c-ink); }
+.xelox-svc-faqform__faq { min-width: 0; }
+/* Formularz = JEDNA czysta karta (bez zagnieżdżonego białego prostokąta) */
+.xelox-svc-faqform__form {
+	background: #fff; border: 1px solid var(--c-line); border-radius: 16px;
+	padding: clamp(24px, 3vw, 34px);
+	box-shadow: var(--shadow-card);
+	position: sticky; top: calc(var(--header-h) + 24px);
+}
+.xelox-svc-faqform__sub { color: var(--c-muted); margin: 0 0 22px; line-height: 1.55; }
+/* wewnętrzny wrap CF7 — bez własnej ramki/tła/paddingu (już jest karta) */
+.xelox-svc-faqform__form .xelox-form-wrap { background: transparent; border: 0; border-radius: 0; padding: 0; box-shadow: none; }
+
+/* Dane kontaktowe pod FAQ (elegancko) */
+.xelox-svc-contact { margin-top: clamp(28px, 4vw, 40px); padding-top: 28px; border-top: 1px solid var(--c-line); }
+.xelox-svc-contact__lead { color: var(--c-ink); font-weight: 600; margin: 0 0 18px; font-size: 1.05rem; line-height: 1.5; }
+.xelox-svc-contact__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.xelox-svc-contact__list li { display: flex; align-items: center; gap: 13px; color: var(--c-ink-soft); font-size: .97rem; line-height: 1.35; }
+.xelox-svc-contact__ico { flex: 0 0 auto; width: 38px; height: 38px; border-radius: 11px; background: var(--c-brand-soft); color: var(--c-brand-ink); display: inline-flex; align-items: center; justify-content: center; }
+.xelox-svc-contact__list a { color: var(--c-ink-soft); font-weight: 600; }
+.xelox-svc-contact__list a:hover { color: var(--c-brand-ink); }
+
+@media (max-width: 860px) {
+	.xelox-svc-faqform__grid { grid-template-columns: 1fr; gap: 44px; }
+	.xelox-svc-faqform__form { position: static; }
+}
+
+/* ── „Co obejmuje polisa?" — szuflady (accordion) z treścią SEO ── */
+.xelox-scope-acc { margin-top: var(--sp-5); display: flex; flex-direction: column; gap: 10px; }
+.xelox-scope-acc__item {
+	background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius-md);
+	overflow: hidden;
+	transition: border-color .25s var(--ease, ease), box-shadow .25s var(--ease, ease), transform .25s var(--ease, ease);
+}
+.xelox-scope-acc__item:hover {
+	border-color: var(--c-brand);
+	box-shadow: 0 10px 28px -18px rgba(18, 114, 158, .45);
+	transform: translateY(-1px);
+}
+.xelox-scope-acc__item.is-open { border-color: var(--c-brand); }
+.xelox-scope-acc__row {
+	display: flex; align-items: center; gap: var(--sp-3); width: 100%;
+	padding: 15px 18px; background: none; border: 0; cursor: pointer; text-align: left;
+	font-family: inherit; font-size: var(--text-sm); font-weight: 600; color: var(--c-ink);
+}
+.xelox-scope-acc__item--plain .xelox-scope-acc__row { cursor: default; }
+.xelox-scope-acc__check {
+	flex-shrink: 0; width: 24px; height: 24px; background: var(--c-brand-soft);
+	border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--c-brand-ink);
+	transition: background .25s var(--ease, ease), color .25s var(--ease, ease), transform .25s var(--ease, ease);
+}
+.xelox-scope-acc__item:hover .xelox-scope-acc__check,
+.xelox-scope-acc__item.is-open .xelox-scope-acc__check { background: var(--c-brand); color: #fff; }
+.xelox-scope-acc__item.is-open .xelox-scope-acc__check { transform: scale(1.06); }
+.xelox-scope-acc__title { flex: 1; min-width: 0; }
+.xelox-scope-acc__chevron {
+	flex-shrink: 0; color: var(--c-muted, #6b7694); display: flex;
+	transition: transform .3s var(--ease, ease), color .25s var(--ease, ease);
+}
+.xelox-scope-acc__item.is-open .xelox-scope-acc__chevron { transform: rotate(180deg); color: var(--c-brand-ink); }
+.xelox-scope-acc__panel {
+	display: grid; grid-template-rows: 0fr;
+	transition: grid-template-rows .35s var(--ease, ease);
+}
+.xelox-scope-acc__item.is-open .xelox-scope-acc__panel { grid-template-rows: 1fr; }
+.xelox-scope-acc__body { overflow: hidden; min-height: 0; }
+.xelox-scope-acc__body p {
+	margin: 0; padding: 0 18px 16px 60px;
+	font-size: var(--text-sm); line-height: 1.7; color: var(--c-ink-soft);
+	opacity: 0; transform: translateY(-4px);
+	transition: opacity .3s var(--ease, ease) .08s, transform .3s var(--ease, ease) .08s;
+}
+.xelox-scope-acc__item.is-open .xelox-scope-acc__body p { opacity: 1; transform: none; }
+@media (max-width: 640px) {
+	.xelox-scope-acc__body p { padding-left: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.xelox-scope-acc__item, .xelox-scope-acc__check, .xelox-scope-acc__chevron,
+	.xelox-scope-acc__panel, .xelox-scope-acc__body p { transition: none; }
+	.xelox-scope-acc__item:hover { transform: none; }
+}

@@ -1,0 +1,8 @@
+/* ── Breadcrumbs ── */
+.xelox-breadcrumbs { padding-block: var(--sp-4); border-bottom: 1px solid var(--c-line); }
+.xelox-breadcrumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); list-style: none; font-size: var(--text-sm); color: var(--c-muted); }
+.xelox-breadcrumbs li { display: flex; align-items: center; gap: var(--sp-2); }
+.xelox-breadcrumbs li + li::before { content: "/"; color: var(--c-line); }
+.xelox-breadcrumbs a { color: var(--c-muted); }
+.xelox-breadcrumbs a:hover { color: var(--c-brand-ink); }
+.xelox-breadcrumbs [aria-current="page"] { color: var(--c-ink); font-weight: var(--fw-medium); }
