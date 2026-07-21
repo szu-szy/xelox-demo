@@ -19,15 +19,28 @@ export function initAccordion() {
 
 /**
  * Szuflady „Co obejmuje polisa?" (single-usluga) — animowane grid-rows w CSS,
- * JS przełącza tylko is-open + aria-expanded. Multi-open.
+ * JS przełącza is-open + aria-expanded. Single-open: otwarcie jednej zamyka
+ * pozostałe w obrębie tej samej sekcji [data-scope-acc] (jak Bootstrap collapse).
  */
 export function initScopeAcc() {
-	document.querySelectorAll('[data-scope-acc] .xelox-scope-acc__row[aria-controls]').forEach((btn) => {
-		btn.addEventListener('click', () => {
-			const item = btn.closest('.xelox-scope-acc__item');
-			const open = btn.getAttribute('aria-expanded') === 'true';
-			btn.setAttribute('aria-expanded', String(!open));
-			if (item) item.classList.toggle('is-open', !open);
+	document.querySelectorAll('[data-scope-acc]').forEach((group) => {
+		const rows = group.querySelectorAll('.xelox-scope-acc__row[aria-controls]');
+		rows.forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const item = btn.closest('.xelox-scope-acc__item');
+				const willOpen = btn.getAttribute('aria-expanded') !== 'true';
+				// Zamknij wszystkie w tej sekcji…
+				rows.forEach((other) => {
+					other.setAttribute('aria-expanded', 'false');
+					const otherItem = other.closest('.xelox-scope-acc__item');
+					if (otherItem) otherItem.classList.remove('is-open');
+				});
+				// …i otwórz klikniętą (jeśli była zamknięta — klik w otwartą ją zamyka).
+				if (willOpen) {
+					btn.setAttribute('aria-expanded', 'true');
+					if (item) item.classList.add('is-open');
+				}
+			});
 		});
 	});
 }
