@@ -255,3 +255,10 @@
 .xelox-post-card__media--placeholder { background: var(--c-gradient, linear-gradient(135deg, var(--c-brand), var(--c-brand-ink))); display: grid; place-items: center; }
 .xelox-post-card__media--placeholder::after { display: none; }
 .xelox-post-card__ph { color: rgba(255,255,255,.55); display: grid; place-items: center; }
+
+/* Przycisk Gutenberga (wp:button) w treści artykułu — brandowy, nie goły link. */
+.xelox-art-prose .wp-block-button { margin: 1.6em 0; }
+.xelox-art-prose .wp-block-button__link,
+.xelox-art-prose .wp-element-button { display: inline-block; background: var(--c-brand); color: #fff; padding: 13px 28px; border-radius: var(--radius-pill, 999px); font-weight: 700; text-decoration: none; transition: background .2s var(--ease, ease), transform .2s var(--ease, ease); }
+.xelox-art-prose .wp-block-button__link:hover { background: var(--c-brand-ink); color: #fff; transform: translateY(-1px); }
+.xelox-art-prose .wp-block-button.is-style-outline .wp-block-button__link { background: transparent; color: var(--c-brand-ink); border: 1.5px solid var(--c-brand); }

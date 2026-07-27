@@ -22,3 +22,14 @@
 
 /* Dane rejestrowe (spółka jawna) */
 .xelox-footer__legal { font-size: 0.78rem; color: rgba(255,255,255,.4); margin: 0 auto var(--sp-3); text-align: center; }
+
+/* Uslugi w stopce w 2 kolumnach (SEO 2026-07-27) */
+.xelox-footer__list--cols {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	column-gap: var(--sp-5);
+	row-gap: var(--sp-3);
+}
+@media (max-width: 640px) {
+	.xelox-footer__list--cols { grid-template-columns: 1fr; }
+}
